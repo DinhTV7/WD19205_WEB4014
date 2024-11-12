@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminSanPhamController extends Controller
 {
@@ -12,7 +13,13 @@ class AdminSanPhamController extends Controller
      */
     public function index()
     {
-        echo "Thầy Định đẹp trai";
+        // Lấy ra toàn bộ dữ liệu
+        $listSanPham = DB::table('san_phams')->orderByDesc('id')->paginate(1);
+
+        // Kết quả trả ra là một mảng các đối tượng
+        // dd($listSanPham);
+
+        return view('admins.sanphams.index', compact('listSanPham'));
     }
 
     /**

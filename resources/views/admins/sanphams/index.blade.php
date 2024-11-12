@@ -7,7 +7,6 @@
 @endsection
 
 @section('CSS')
-
 @endsection
 
 {{-- @section: dùng để chị định phần nội dụng được hiển thị --}}
@@ -51,15 +50,50 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">STT</th>
+                                                <th scope="col">Mã sản phẩm</th>
+                                                <th scope="col">Hình ảnh</th>
                                                 <th scope="col">Tên sản phẩm</th>
+                                                <th scope="col">Giá sản phẩm</th>
+                                                <th scope="col">Giá khuyến mãi</th>
                                                 <th scope="col">Trạng thái</th>
                                                 <th scope="col">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            
+                                            @foreach ($listSanPham as $index => $sanPham)
+                                                <tr>
+                                                    <td>{{ $index + 1 }}</td>
+                                                    <td>{{ $sanPham->ma_san_pham }}</td>
+                                                    <td>
+                                                        <img src="" alt="Hình ảnh">
+                                                    </td>
+                                                    <td>{{ $sanPham->ten_san_pham }}</td>
+                                                    <td>{{ number_format($sanPham->gia, 0, '', '.') }} VNĐ</td>
+                                                    <td>{{ number_format($sanPham->gia_khuyen_mai, 0, '', '.') }} VNĐ</td>
+                                                    <td>
+                                                        {{-- {{ $sanPham->trang_thai }} --}}
+                                                        @if ($sanPham->trang_thai == 1)
+                                                            <span
+                                                                class="badge bg-success-subtle text-success text-uppercase">Active
+                                                            </span>
+                                                        @else
+                                                            <span
+                                                                class="badge bg-danger-subtle text-danger text-uppercase">Unactive
+                                                            </span>
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-primary">Xem</button>
+                                                        <button class="btn btn-sm btn-warning">Sửa</button>
+                                                        <button class="btn btn-sm btn-danger">Xóa</button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
+                                    <div class="mt-3">
+                                        {{ $listSanPham->links('pagination::bootstrap-5') }}
+                                    </div>
                                 </div>
                             </div>
 
