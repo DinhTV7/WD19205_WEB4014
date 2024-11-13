@@ -70,12 +70,12 @@
                     <div class="collapse menu-dropdown" id="sidebarSanPham">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="" class="nav-link" data-key="t-sweet-alerts">
+                                <a href="{{ route('sanphams.index') }}" class="nav-link" data-key="t-sweet-alerts">
                                     Danh sách
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link" data-key="t-nestable-list">
+                                <a href="{{ route('sanphams.create') }}" class="nav-link" data-key="t-nestable-list">
                                     Thêm mới
                                 </a>
                             </li>
