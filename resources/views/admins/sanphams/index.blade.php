@@ -37,7 +37,7 @@
                     <div class="card">
                         <div class="card-header align-items-center d-flex">
                             <h4 class="card-title mb-0 flex-grow-1">Danh sách sản phẩm</h4>
-                            <a href="?act=form-them-danh-muc" class="btn btn-soft-success material-shadow-none">
+                            <a href="{{ route('sanphams.create') }}" class="btn btn-soft-success material-shadow-none">
                                 <i class="ri-add-circle-line align-middle me-1"></i>
                                 Thêm sản phẩm
                             </a>
@@ -46,6 +46,23 @@
                         <div class="card-body">
                             <div class="live-preview">
                                 <div class="table-responsive">
+                                    @if (session('success'))
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <strong> {{ session('success') }} </strong>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                        </div>
+                                    @endif
+
+                                    @if (session('error'))
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            <strong> {{ session('error') }} </strong>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                        </div>
+                                    @endif
+
+
                                     <table class="table table-striped table-nowrap align-middle mb-0">
                                         <thead>
                                             <tr>
@@ -65,7 +82,8 @@
                                                     <td>{{ $index + 1 }}</td>
                                                     <td>{{ $sanPham->ma_san_pham }}</td>
                                                     <td>
-                                                        <img src="" alt="Hình ảnh">
+                                                        <img src="{{ Storage::url($sanPham->hinh_anh) }}" 
+                                                            class="img-thumbnail" alt="Hình ảnh" width="100px">
                                                     </td>
                                                     <td>{{ $sanPham->ten_san_pham }}</td>
                                                     <td>{{ number_format($sanPham->gia, 0, '', '.') }} VNĐ</td>

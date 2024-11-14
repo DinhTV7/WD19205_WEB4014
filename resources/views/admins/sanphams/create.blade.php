@@ -42,6 +42,7 @@
                         <div class="card-body">
                             <div class="live-preview">
                                 <form action="{{ route('sanphams.store') }}" method="POST" enctype="multipart/form-data">
+                                    {{-- Khi sử dụng form trong Laravel bắt buộc phải có @csrf --}}
                                     @csrf
 
                                     <div class="row gy-4">
@@ -49,7 +50,7 @@
                                             <div class="mt-3">
                                                 <label for="ma_san_pham" class="form-label">Mã sản phẩm</label>
                                                 <input type="text" class="form-control " name="ma_san_pham"
-                                                    id="ma_san_pham">
+                                                    id="ma_san_pham" value="{{ strtoupper(Str::random(10)) }}" readonly>
                                             </div>
 
                                             <div class="mt-3">
@@ -60,7 +61,7 @@
 
                                             <div class="mt-3">
                                                 <label for="gia" class="form-label">Giá bán</label>
-                                                <input type="number" step="0.01" class="form-control" id="gia"
+                                                <input type="number" step="0.01" name="gia" class="form-control" id="gia"
                                                     placeholder="Giá bán">
                                             </div>
 
@@ -72,7 +73,7 @@
 
                                             <div class="mt-3">
                                                 <label for="so_luong" class="form-label">Số lượng</label>
-                                                <input type="number" class="form-control" name="so_luong" id="so_luong">
+                                                <input type="number" class="form-control" name="so_luong" id="so_luong" value="0">
                                             </div>
 
                                             <div class="mt-3">
