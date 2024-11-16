@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AdminSanPhamRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -33,7 +34,7 @@ class AdminSanPhamController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AdminSanPhamRequest $request)
     {
         // dd($request->all());
         DB::beginTransaction();
@@ -42,9 +43,7 @@ class AdminSanPhamController extends Controller
             // Xử lý hình ảnh
             $filePath = null;
             if ($request->hasFile('hinh_anh')) {
-                $file = $request->file('hinh_anh');
-                $fileName = uniqid() . '_' . $file->getClientOriginalName();
-                $filePath = $file->storeAs('uploads/sanpham', $fileName, 'public');
+                $filePath = $request->file('hinh_anh')->store('uploads/sanpham', 'public');
             }
 
             // Xử lý thêm dữ liệu
