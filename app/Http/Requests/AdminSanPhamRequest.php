@@ -22,7 +22,7 @@ class AdminSanPhamRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'ma_san_pham'       => 'required|unique:san_phams,ma_san_pham|max:20',
+            'ma_san_pham'       => 'required|max:20|unique:san_phams,ma_san_pham,' . $this->sanpham,
             'ten_san_pham'      => 'required|max:255',
             'gia'               => 'required|numeric|min:0|max:99999999',
             'gia_khuyen_mai'    => 'nullable|numeric|min:0|max:99999999|lt:gia',

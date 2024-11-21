@@ -102,8 +102,15 @@
                                                     </td>
                                                     <td>
                                                         <button class="btn btn-sm btn-primary">Xem</button>
-                                                        <button class="btn btn-sm btn-warning">Sửa</button>
-                                                        <button class="btn btn-sm btn-danger">Xóa</button>
+                                                        
+                                                        <a href="{{ route('sanphams.edit', $sanPham->id) }}" class="btn btn-sm btn-warning">Sửa</a>
+                                                        
+                                                        <form action="{{ route('sanphams.destroy', $sanPham->id) }}" method="POST"
+                                                            onsubmit="return confirm('Xác nhận xóa sản phẩm?')" class="d-inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm btn-danger">Xóa</button>
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             @endforeach
