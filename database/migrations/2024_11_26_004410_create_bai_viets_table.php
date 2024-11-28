@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('bai_viets', function (Blueprint $table) {
             $table->id();
+            $table->string('hinh_anh')->nullable();
+            $table->string('tieu_de');
+            $table->text('noi_dung');
+            $table->date('ngay_dang')->default(date('Y-m-d'));
+            $table->boolean('trang_thai')->default(true);
             $table->timestamps();
         });
     }
