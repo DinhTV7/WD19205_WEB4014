@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminSanPhamRequest;
+use App\Models\SanPham;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +17,10 @@ class AdminSanPhamController extends Controller
     public function index()
     {
         // Lấy ra toàn bộ dữ liệu
-        $listSanPham = DB::table('san_phams')->orderByDesc('id')->paginate(5);
+        // $listSanPham = DB::table('san_phams')->orderByDesc('id')->paginate(5);
+
+        // Sử dụng Eloquent khi muốn sử dụng xóa mềm
+        $listSanPham = SanPham::orderByDesc('id')->paginate(5);
 
         // Kết quả trả ra là một mảng các đối tượng
         // dd($listSanPham);
@@ -171,7 +175,11 @@ class AdminSanPhamController extends Controller
     public function destroy(string $id)
     {
         // Lấy lại thông tin của sản phẩm cần xóa
-        $sanPham = DB::table('san_phams')->find($id);
+        // Sử dụng query builder
+        // $sanPham = DB::table('san_phams')->find($id);
+
+        // Muốn xóa mềm phải sử dụng eloquent
+        $sanPham = SanPham::find($id);
 
         // Kiểm tra sản phẩm đó có tồn tại hay không
         if (!$sanPham) {
@@ -182,7 +190,12 @@ class AdminSanPhamController extends Controller
         // Lưu trữ đường dẫn của hình ảnh vào đây
         $filePath = $sanPham->hinh_anh;
 
-        $deleteSanPham = DB::table('san_phams')->where('id', $id)->delete();
+        // Sử dụng query builder
+        // $deleteSanPham = DB::table('san_phams')->where('id', $id)->delete();
+
+        // Sử dụng eloquent
+        $deleteSanPham = $sanPham->delete();
+        // dd($deleteSanPham);
 
         // Nếu xóa thành công thì tiến hành xóa ảnh
         if ($deleteSanPham) {
